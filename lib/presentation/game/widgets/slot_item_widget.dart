@@ -19,7 +19,7 @@ class SlotItemWidget extends StatelessWidget {
       animation: controller,
       builder: (context, child) {
         return SizedBox(
-          height: height * (slotStage == 1 ? 0.467 : 0.52),
+          height: height * (slotStage == 1 ? 0.38 : 0.52),
           width: 100,
           child: ListView.builder(
             physics: const NeverScrollableScrollPhysics(),

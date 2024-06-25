@@ -10,9 +10,7 @@ class StoryContainerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Container(
-      height: height * 0.244,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage(

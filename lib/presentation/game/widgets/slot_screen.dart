@@ -53,21 +53,21 @@ class SlotScreen extends StatelessWidget {
                         width: width,
                         fit: BoxFit.fill,
                       ),
-                      if ( controller.isMegaWin) ...[
+                      if (!controller.showTasks && !controller.isMegaWin) ...[
                         Positioned(
-                          top: controller.slotStage == 1 ? 60 : 70,
+                          top: controller.slotStage == 1 ? 50 : 70,
                           left: controller.slotStage == 1 ? 0 : 23,
                           right: controller.slotStage == 1 ? 0 : 23,
                           child: Image.asset(
                             'assets/bg/slot_${controller.slotStage == 1 ? 1 : 2}_bg.png',
                             width: width,
                             height: height *
-                                (controller.slotStage == 1 ? 0.6 : 0.58),
+                                (controller.slotStage == 1 ? 0.55 : 0.58),
                             fit: BoxFit.fill,
                           ),
                         ),
                         Positioned(
-                          top: controller.slotStage == 1 ? 105 : 87,
+                          top: controller.slotStage == 1 ? 125 : 87,
                           left: 23,
                           right: 23,
                           child: Row(
@@ -93,7 +93,8 @@ class SlotScreen extends StatelessWidget {
                         ),
                         if (!controller.showEmptyBalance) ...[
                           Positioned(
-                            bottom: controller.slotStage == 1 ? 145 : 125,
+                            bottom: height *
+                                (controller.slotStage == 1 ? 0.25 : 0.141),
                             child: GestureDetector(
                               onTap: controller.next,
                               child: Container(
@@ -120,7 +121,8 @@ class SlotScreen extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                            bottom: controller.slotStage == 1 ? 85 : 70,
+                            bottom: height *
+                                (controller.slotStage == 1 ? 0.15 : 0.13),
                             child: GestureDetector(
                               onTap: controller.betController.text == '0' ||
                                       controller.betController.text.isEmpty
@@ -150,7 +152,7 @@ class SlotScreen extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                            bottom: controller.slotStage == 1 ? 15 : 6,
+                            bottom: controller.slotStage == 1 ? 45 : 6,
                             left: 25,
                             right: 25,
                             child: MakeBetWidget(

@@ -2,6 +2,7 @@ import 'package:cursed_city/models/task_model.dart';
 import 'package:cursed_city/presentation/chips_store/chips_store_screen.dart';
 import 'package:cursed_city/presentation/customs/button_widget.dart';
 import 'package:cursed_city/presentation/customs/custom_app_bar.dart';
+import 'package:cursed_city/presentation/game/game_screen.dart';
 import 'package:cursed_city/presentation/home/controller/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,6 +41,8 @@ class HomeScreen extends StatelessWidget {
                     left: 25,
                     right: 25,
                     child: CustomAppBar(
+                      playMusic: controller.isPlaying,
+                      isHomaPage: true,
                       balance: balanceFormBd.toString(),
                       onTap: controller.playPause,
                     ),
@@ -50,13 +53,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         ButtonWidget(
                           text: 'NEW GAME',
-                          onTap: () {
-                            controller.goToGameScreen(
-                              balanceFormBd,
-                              slotStageFromBd,
-                              tasksFromBd,
-                            );
-                          },
+                          onTap: controller.startNewGame,
                         ),
                         const SizedBox(height: 20),
                         ButtonWidget(
@@ -65,11 +62,11 @@ class HomeScreen extends StatelessWidget {
                           onTap: isBdEmpty
                               ? () {}
                               : () {
-                                  controller.goToGameScreen(
-                                    balanceFormBd,
-                                    slotStageFromBd,
-                                    tasksFromBd,
-                                  );
+                                  Get.to(() => GameScreen(
+                                        balanceFormBd: balanceFormBd,
+                                        slotStageFromBd: slotStageFromBd,
+                                        tasksFromBd: tasksFromBd,
+                                      ));
                                 },
                         ),
                         const SizedBox(height: 20),

@@ -32,14 +32,14 @@ class CustomAppBar extends StatelessWidget {
                   image: AssetImage('assets/images/icon_container.png'),
                 ),
               ),
-              child: isHomaPage
+              child: !isHomaPage
                   ? const Icon(
                       Icons.home,
                       color: Colors.white,
                       size: 18,
                     )
                   : Image.asset(
-                      'assets/images/${playMusic ? 'no_music' : 'music'}.png'),
+                      'assets/images/${!playMusic ? 'no_music' : 'music'}.png'),
             ),
           ),
           SizedBox(

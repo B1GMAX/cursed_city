@@ -1,11 +1,12 @@
-import 'package:cursed_city/models/task_model.dart';
 import 'package:cursed_city/presentation/game/game_screen.dart';
+import 'package:cursed_city/repository/preferences/preferences.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
 class HomeController extends GetxController {
   late AudioPlayer _player;
+  bool isPlaying = false;
 
   final _playlist = ConcatenatingAudioSource(children: [
     AudioSource.asset(
@@ -22,11 +23,7 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     _player = AudioPlayer();
-
-
     _player.setLoopMode(LoopMode.all);
-
-    print('_player.loopMode - ${_player.loopMode}');
 
     _player.playbackEventStream.listen((event) {},
         onError: (Object e, StackTrace stackTrace) {
@@ -42,25 +39,21 @@ class HomeController extends GetxController {
     }
   }
 
-  void goToGameScreen(
-    int? balanceFormBd,
-    int? slotStageFromBd,
-    List<TaskModel>? tasksFromBd,
-  ) {
+  void startNewGame() async {
+   await (await Preferences.instance.pref).clear();
     Get.to(
-      () => GameScreen(
-        balanceFormBd: balanceFormBd,
-        slotStageFromBd: slotStageFromBd,
-        tasksFromBd: tasksFromBd,
-      ),
+      () => const GameScreen(),
     );
   }
 
   void playPause() {
     if (_player.playing) {
       _player.pause();
+      isPlaying = !isPlaying;
     } else {
       _player.play();
+      isPlaying = !isPlaying;
     }
+    update();
   }
 }

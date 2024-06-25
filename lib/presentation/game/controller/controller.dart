@@ -59,10 +59,14 @@ class GameController extends GetxController with GetTickerProviderStateMixin {
     }
     if (slotStageFromBd != null) {
       slotStage = slotStageFromBd!;
+    } else {
+      startGame = false;
     }
     if (tasksFromBd != null) {
       tasks = tasksFromBd!;
     }
+
+
 
     slotListItems1.addAll(defaultSLot1Items1);
     slotListItems2.addAll(defaultSLot1Items2);
@@ -103,15 +107,15 @@ class GameController extends GetxController with GetTickerProviderStateMixin {
     slotListItems1.clear();
     slotListItems2.clear();
     slotListItems3.clear();
-   if(slotStage == 1) {
+    if (slotStage == 1) {
       slotListItems1.addAll(defaultSLot1Items1);
       slotListItems2.addAll(defaultSLot1Items2);
       slotListItems3.addAll(defaultSLot1Items3);
     } else {
-     slotListItems1.addAll(defaultSlot2Items1);
-     slotListItems2.addAll(defaultSlot2Items2);
-     slotListItems3.addAll(defaultSlot2Items3);
-   }
+      slotListItems1.addAll(defaultSlot2Items1);
+      slotListItems2.addAll(defaultSlot2Items2);
+      slotListItems3.addAll(defaultSlot2Items3);
+    }
 
     _shuffleItems();
     const int spinDuration = 3;
@@ -170,23 +174,9 @@ class GameController extends GetxController with GetTickerProviderStateMixin {
             _allElementsEqual(row4);
 
     if (isMegaWin) {
-      slotStage == 1
-          ? _highlightWinningRows([
-              row1,
-              row2,
-              row3,
-            ])
-          : _highlightWinningRows([row1, row2, row3, row4]);
       _getBalanceAfterMegaWin();
     }
     if (isWin) {
-      slotStage == 1
-          ? _highlightWinningRows([
-              row1,
-              row2,
-              row3,
-            ])
-          : _highlightWinningRows([row1, row2, row3, row4]);
       _getBalanceResultAfterWin();
     } else {
       _getBalanceResultAfterLoos();
@@ -212,34 +202,9 @@ class GameController extends GetxController with GetTickerProviderStateMixin {
     return result;
   }
 
-  void _highlightWinningRows(List<List<String>> rows) {
-    for (final row in rows) {
-      if (_allElementsEqual(row)) {
-        for (int i = 0; i < row.length; i++) {
-          row[i] = _addGlowToWinItems(row[i]);
-        }
-      }
-    }
-    update();
-  }
-
-  String _addGlowToWinItems(String asset) {
-    final name = _getNameFormAsset(asset);
-    if (slotStage == 2 && (name == 'rings' || name == 'scroll')) {
-      return 'assets/images/${name}_glow_2.png';
-    } else {
-      return 'assets/images/${name}_glow.png';
-    }
-  }
-
-  String _getNameFormAsset(String asset) {
-    List<String> parts = asset.split('/');
-    return parts.last.split('.').first;
-  }
-
   void closeMegaWin() {
-    isMegaWin = !isMegaWin;
     _crossTask('Get matches in all three rows simultaneously', isMegaWin);
+    isMegaWin = !isMegaWin;
     update();
   }
 
