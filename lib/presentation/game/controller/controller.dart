@@ -31,13 +31,21 @@ class GameController extends GetxController with GetTickerProviderStateMixin {
   bool isMegaWin = false;
   bool startGame = false;
   int chipsCount = 0;
-  int slotStage = 1;
+  int slotStage = 2;
   int storyCount = 1;
   bool showTasks = false;
   bool showEmptyBalance = false;
   bool showFinalStory = false;
   String storyText =
       "Hi. I'm Maria, and I'm one of the few left in this cursed town. This used to be a place of joy and winnings, but now... look around.";
+
+  List<TaskModel> tasks = [
+    TaskModel(text: 'Win 10,000 Chips'),
+    TaskModel(text: 'Get 3 matches in the slot.'),
+    TaskModel(text: 'Make 10 spins.'),
+    TaskModel(text: 'Win 20,000 Chips'),
+    TaskModel(text: 'Get matches in all three rows simultaneously'),
+  ];
 
   List<String> slotListItems1 = [];
 
@@ -59,21 +67,17 @@ class GameController extends GetxController with GetTickerProviderStateMixin {
     }
     if (slotStageFromBd != null) {
       slotStage = slotStageFromBd!;
-    } else {
-      startGame = false;
     }
-    if (tasksFromBd != null) {
+
+    if (tasksFromBd != null && tasksFromBd!.isNotEmpty) {
       tasks = tasksFromBd!;
     }
-
-
 
     slotListItems1.addAll(defaultSLot1Items1);
     slotListItems2.addAll(defaultSLot1Items2);
     slotListItems3.addAll(defaultSLot1Items3);
     update();
   }
-
   void _shuffleItems() {
     slotListItems1.shuffle();
     slotListItems2.shuffle();
@@ -316,14 +320,6 @@ class GameController extends GetxController with GetTickerProviderStateMixin {
     }
     update();
   }
-
-  List<TaskModel> tasks = [
-    TaskModel(text: 'Win 10,000 Chips'),
-    TaskModel(text: 'Get 3 matches in the slot.'),
-    TaskModel(text: 'Make 10 spins.'),
-    TaskModel(text: 'Win 20,000 Chips'),
-    TaskModel(text: 'Get matches in all three rows simultaneously'),
-  ];
 
   void changeStory() {
     storyCount++;

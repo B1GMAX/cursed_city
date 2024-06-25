@@ -10,7 +10,7 @@ import 'answers_widget.dart';
 class StoryScreen extends StatelessWidget {
   const StoryScreen({
     super.key,
-    required  this.balanceFormBd,
+    required this.balanceFormBd,
     required this.slotStageFromBd,
     required this.tasksFromBd,
   });
@@ -22,6 +22,7 @@ class StoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: GetBuilder<GameController>(
@@ -47,7 +48,8 @@ class StoryScreen extends StatelessWidget {
                           onTap: controller.start,
                           buttonText: 'Start',
                           tasks: controller.tasks,
-                          topPosition: controller.storyCount != 7 ? 30 : 100,
+                          topPosition:
+                              controller.storyCount != 7 ? 35 : height * 0.142,
                         )
                       : Positioned(
                           top: 90,
@@ -62,7 +64,7 @@ class StoryScreen extends StatelessWidget {
                       left: 70,
                       child: Image.asset(
                         'assets/images/girl.png',
-                        height: controller.showTasks ? 370 : 460,
+                        height: height * (controller.showTasks ? 0.524 : 0.651),
                       ),
                     ),
                   if (controller.storyCount != 7)

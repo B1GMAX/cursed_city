@@ -26,8 +26,8 @@ class BuyChipsWidget extends StatelessWidget {
             bottom: 90,
             right: 50,
             child: Container(
-              width: 223,
-              height: 111,
+              width: height * 0.316,
+              height: width * 0.27,
               padding: const EdgeInsets.all(15),
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -53,7 +53,7 @@ class BuyChipsWidget extends StatelessWidget {
             right: 90,
             child: SizedBox(
               height: 42,
-              width: 134,
+              width: width * 0.327,
               child: ButtonWidget(
                 smallButton: true,
                 text: 'BUY CHIPS',

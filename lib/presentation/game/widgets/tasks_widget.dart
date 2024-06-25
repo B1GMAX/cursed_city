@@ -20,7 +20,7 @@ class TasksWidget extends StatelessWidget {
           fit: BoxFit.fill,
         ),
       ),
-      padding: const EdgeInsets.only(top: 50),
+      padding: const EdgeInsets.only(top: 55),
       child: Column(
         children: [
           ...tasks.mapIndexed((index, task) => Padding(

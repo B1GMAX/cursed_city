@@ -62,12 +62,13 @@ class SlotScreen extends StatelessWidget {
                             'assets/bg/slot_${controller.slotStage == 1 ? 1 : 2}_bg.png',
                             width: width,
                             height: height *
-                                (controller.slotStage == 1 ? 0.55 : 0.58),
+                                (controller.slotStage == 1 ? 0.55 : 0.52),
                             fit: BoxFit.fill,
                           ),
                         ),
                         Positioned(
-                          top: controller.slotStage == 1 ? 125 : 87,
+                          top: height *
+                              (controller.slotStage == 1 ? 0.142 : 0.124),
                           left: 23,
                           right: 23,
                           child: Row(
@@ -94,7 +95,7 @@ class SlotScreen extends StatelessWidget {
                         if (!controller.showEmptyBalance) ...[
                           Positioned(
                             bottom: height *
-                                (controller.slotStage == 1 ? 0.25 : 0.141),
+                                (controller.slotStage == 1 ? 0.25 : 0.22),
                             child: GestureDetector(
                               onTap: controller.next,
                               child: Container(
@@ -152,7 +153,7 @@ class SlotScreen extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                            bottom: controller.slotStage == 1 ? 45 : 6,
+                            bottom: controller.slotStage == 1 ? 35 : 6,
                             left: 25,
                             right: 25,
                             child: MakeBetWidget(

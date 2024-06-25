@@ -40,10 +40,15 @@ class HomeController extends GetxController {
   }
 
   void startNewGame() async {
-   await (await Preferences.instance.pref).clear();
-    Get.to(
-      () => const GameScreen(),
-    );
+    await (await Preferences.instance.pref).clear();
+    final getBalanceResult = await Preferences.instance.getBalance();
+    final getSlotStageResult = await Preferences.instance.getSlotStage();
+    final getTaskListResult = await Preferences.instance.getTaskList();
+    Get.to(() => GameScreen(
+          balanceFormBd: getBalanceResult,
+          slotStageFromBd: getSlotStageResult,
+          tasksFromBd: getTaskListResult,
+        ));
   }
 
   void playPause() {

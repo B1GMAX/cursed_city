@@ -10,9 +10,9 @@ import 'package:get/get.dart';
 class GameScreen extends StatelessWidget {
   const GameScreen({
     super.key,
-    this.balanceFormBd,
-    this.slotStageFromBd,
-    this.tasksFromBd,
+    required this.balanceFormBd,
+    required this.slotStageFromBd,
+    required this.tasksFromBd,
   });
 
   final int? balanceFormBd;
@@ -21,51 +21,51 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('slotStageFromBd - $slotStageFromBd');
     return GetBuilder(
-      init: GameController(
-        balanceFormBd: balanceFormBd,
-        slotStageFromBd: slotStageFromBd,
-        tasksFromBd: tasksFromBd,
-      ),
-      builder: (controller)
-      {
-           return   Stack(
-                children: [
-                  slotStageFromBd == null
-                      ? controller.startGame
-                          ? SlotScreen(
-                              balanceFormBd: balanceFormBd,
-                              slotStageFromBd: slotStageFromBd,
-                              tasksFromBd: tasksFromBd,
-                            )
-                          : StoryScreen(
-                              balanceFormBd: balanceFormBd,
-                              slotStageFromBd: slotStageFromBd,
-                              tasksFromBd: tasksFromBd,
-                            )
-                      : SlotScreen(
+        init: GameController(
+          balanceFormBd: balanceFormBd,
+          slotStageFromBd: slotStageFromBd,
+          tasksFromBd: tasksFromBd,
+        ),
+        builder: (controller) {
+          return Stack(
+            children: [
+              slotStageFromBd == null
+                  ? controller.startGame
+                      ? SlotScreen(
                           balanceFormBd: balanceFormBd,
                           slotStageFromBd: slotStageFromBd,
                           tasksFromBd: tasksFromBd,
-                        ),
-                  Positioned(
-                    top: 26,
-                    left: 25,
-                    right: 25,
-                    child: CustomAppBar(
-                      balance: controller.balance.toString(),
-                      onTap: () => Get.to(
+                        )
+                      : StoryScreen(
+                          balanceFormBd: balanceFormBd,
+                          slotStageFromBd: slotStageFromBd,
+                          tasksFromBd: tasksFromBd,
+                        )
+                  : SlotScreen(
+                      balanceFormBd: balanceFormBd,
+                      slotStageFromBd: slotStageFromBd,
+                      tasksFromBd: tasksFromBd,
+                    ),
+              Positioned(
+                top: 26,
+                left: 25,
+                right: 25,
+                child: CustomAppBar(
+                    balance: controller.balance.toString(),
+                    onTap: () {
+                      Get.off(
                         () => HomeScreen(
                           balanceFormBd: controller.balance,
                           slotStageFromBd: controller.slotStage,
                           tasksFromBd: controller.tasks,
                         ),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            });
+                      );
+                      Get.delete<GameController>();
+                    }),
+              ),
+            ],
+          );
+        });
   }
 }
